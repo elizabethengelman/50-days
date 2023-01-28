@@ -4,6 +4,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+// https://medium.com/@pallavi.ray24/saving-p5-js-sketches-as-videos-9376068afc10
+
 /* ===
 ml5 Example
 PoseNet example using p5.js
@@ -34,14 +36,16 @@ function modelReady() {
 }
 
 function draw() {
-   background("black")
-  //  tint(255, 50); // Display at half opacity
+  background("black")
+    // tint(255, 50); // Display at half opacity
 
-  //image(video, 0, 0, width, height);
+  // image(video, 0, 0, width, height);
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
   drawSkeleton();
+  // saveCanvas('Img', 'png');
+
 }
 
 function importantKeypoint(keypoint) {
