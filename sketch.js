@@ -7,6 +7,7 @@
 // Resources:
 // https://medium.com/@pallavi.ray24/saving-p5-js-sketches-as-videos-9376068afc10
 // https://editor.p5js.org/odmundeetgen/sketches/qqmp0fVSK
+// https://www.youtube.com/watch?app=desktop&v=HDS0FLYwoG4
 /* ===
 ml5 Example
 PoseNet example using p5.js
@@ -34,22 +35,32 @@ function setup() {
   });
   // Hide the video element, and just show the canvas
   video.hide();
+
+  colorMode(HSB, 360, 100, 100);
+  saveCanvas('Img', 'png');
+  // background("black");
 }
 
 function modelReady() {
   select("#status").html("Model Loaded");
 }
 
+let hue = 0;
+const saturation = 100;
+const brightness = 100;
+
 function draw() {
-  background("black");
-  // tint(255, 50); // Display at half opacity
+  fill(0, 0, 0, 63);
+  rect(0, 0, width, height);
 
-  // image(video, 0, 0, width, height);
-
-  // We can call both functions to draw all keypoints and the skeletons
-  drawSkeleton();
-  drawKeypoints();
-  // saveCanvas('Img', 'png');
+  let c = color(hue, saturation, brightness);
+  drawSkeleton(c);
+  drawKeypoints(c);
+  if (hue < 360) {
+    hue++;
+  } else {
+    hue = 0;
+  }
 }
 
 function importantKeypoint(keypoint) {
@@ -74,7 +85,11 @@ function importantKeypoint(keypoint) {
 const blue = "#0000FF";
 const magenta = "#FF00FF";
 const purple = "#6900ff";
-const allColors = [blue, magenta, purple];
+const brightBlue = "#05C9F9";
+const brightGreen = "#f0fc74";
+const inBetweenGreen = "#f0f993 ";
+const white = "#FFFFFF";
+const allColors = [white, brightGreen, inBetweenGreen];
 
 function getRandomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
@@ -87,6 +102,12 @@ function drawRandomColorEllipse(x, y, w, h) {
   ellipse(x, y, w, h);
 }
 
+function drawEllipse(x, y, w, h, color) {
+  fill(color);
+  noStroke();
+  ellipse(x, y, w, h);
+}
+
 function getKeypointDiameter(keypoint) {
   if (keypoint.part == "nose") {
     return 100;
@@ -95,7 +116,7 @@ function getKeypointDiameter(keypoint) {
 }
 
 // A function to draw ellipses over the detected keypoints
-function drawKeypoints() {
+function drawKeypoints(color) {
   // Loop through all the poses detected
   for (let i = 0; i < poses.length; i++) {
     // For each pose detected, loop through all the keypoints
@@ -107,11 +128,12 @@ function drawKeypoints() {
 
       if (keypoint.score > 0.2 && importantKeypoint(keypoint)) {
         keypointDiameter = getKeypointDiameter(keypoint);
-        drawRandomColorEllipse(
+        drawEllipse(
           keypoint.position.x,
           keypoint.position.y,
           keypointDiameter,
-          keypointDiameter
+          keypointDiameter,
+          color
         );
       }
     }
@@ -119,7 +141,7 @@ function drawKeypoints() {
 }
 
 // A function to draw the skeletons
-function drawSkeleton() {
+function drawSkeleton(color) {
   // Loop through all the skeletons detected
   for (let i = 0; i < poses.length; i++) {
     let skeleton = poses[i].skeleton;
@@ -133,9 +155,7 @@ function drawSkeleton() {
       let y2 = partB.position.y;
       stroke(255, 255, 255);
       strokeWeight(3);
-      let randomColor1 = getRandomColor(allColors);
-      let randomColor2 = getRandomColor(allColors);
-      drawGradientLine(x1, y1, x2, y2, randomColor1, randomColor2);
+      drawGradientLine(x1, y1, x2, y2, color, color);
     }
   }
 }
