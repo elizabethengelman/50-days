@@ -37,8 +37,7 @@ function setup() {
   video.hide();
 
   colorMode(HSB, 360, 100, 100);
-  saveCanvas('Img', 'png');
-  // background("black");
+  background("black");
 }
 
 function modelReady() {
@@ -50,9 +49,6 @@ const saturation = 100;
 const brightness = 100;
 
 function draw() {
-  fill(0, 0, 0, 63);
-  rect(0, 0, width, height);
-
   let c = color(hue, saturation, brightness);
   drawSkeleton(c);
   drawKeypoints(c);
@@ -61,6 +57,8 @@ function draw() {
   } else {
     hue = 0;
   }
+  // fill(255, 0, 0, 25);
+  // rect(0, 0, width, height);
 }
 
 function importantKeypoint(keypoint) {
