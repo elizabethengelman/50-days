@@ -16,9 +16,11 @@ PoseNet example using p5.js
 let video;
 let poseNet;
 let poses = [];
+let looping = false;
 
 function setup() {
   createCanvas(640, 480);
+  noLoop();
   video = createCapture(VIDEO);
   video.size(width, height);
 
@@ -40,6 +42,17 @@ function setup() {
   background("black");
 }
 
+function mousePressed() {
+  if (looping === true) {
+    noLoop();
+    looping = false
+  } else {
+    background("black")
+    loop();
+    looping = true;
+  }
+}
+
 function modelReady() {
   select("#status").html("Model Loaded");
 }
@@ -47,9 +60,11 @@ function modelReady() {
 let hue = 0;
 const saturation = 100;
 const brightness = 100;
+const alpha = 0.1;
 
 function draw() {
-  let c = color(hue, saturation, brightness);
+  // let c = color(hue, saturation, brightness, alpha);
+  let c = color(hue, saturation, brightness, alpha);
   drawSkeleton(c);
   drawKeypoints(c);
   if (hue < 360) {
@@ -57,8 +72,6 @@ function draw() {
   } else {
     hue = 0;
   }
-  // fill(255, 0, 0, 25);
-  // rect(0, 0, width, height);
 }
 
 function importantKeypoint(keypoint) {
