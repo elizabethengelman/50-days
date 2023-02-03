@@ -6,6 +6,7 @@
 - day 4, 2023-01-29: https://www.instagram.com/p/CoA1F1Ugi4t/
 - day 5, 2023-01-30: https://www.instagram.com/p/CoDzxs2ANIc/
 - day 6, 2023-01-31: https://www.instagram.com/p/CoLmGepgM_5/
+- day 7, 2023-02-01: https://www.instagram.com/p/CoLnhokAbla/
 
 ## Ideas:
 
