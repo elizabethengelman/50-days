@@ -60,9 +60,11 @@ function modelReady() {
 let hue = 0;
 const saturation = 100;
 const brightness = 100;
-const alpha = 0.1;
+const alpha = 1;
 
 function draw() {
+
+  background("black");
   // let c = color(hue, saturation, brightness, alpha);
   let c = color(hue, saturation, brightness, alpha);
   drawSkeleton(c);
@@ -72,6 +74,7 @@ function draw() {
   } else {
     hue = 0;
   }
+
 }
 
 function importantKeypoint(keypoint) {
