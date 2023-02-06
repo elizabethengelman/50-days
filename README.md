@@ -9,6 +9,7 @@
 - day 7, 2023-02-01: https://www.instagram.com/p/CoLnhokAbla/
 - day 8, 2023-02-02: https://www.instagram.com/p/CoLrjEhAY3y/
 - day 9, 2023-02-03: https://www.instagram.com/p/CoTODnLApGa/
+- day 10, 2023-02-04: https://www.instagram.com/p/CoTOXCMgO1r/
 
 ## Ideas:
 
